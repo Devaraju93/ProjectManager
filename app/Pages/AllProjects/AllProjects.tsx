@@ -1,11 +1,14 @@
+import AllProjectsSection from "./Components/AllProjectsSection";
 import ProjectsHeader from "./Components/ProjectsHeader";
 import ProjectsSubHeader from "./Components/ProjectsSubHeader";
+import StatsRightSideBar from "./Components/StatsRightSideBar";
 
 
 function AllProjects() {
   return (
     <div className="bg-slate-50 w-full min-h-screen flex">
       <AllProjectsArea />
+      <StatsRightSideBar/>
     </div>
   );
 }
@@ -17,6 +20,8 @@ function AllProjectsArea() {
       <ProjectsHeader />
       {/* my projects tittle and the add button */}
       <ProjectsSubHeader />
+      {/* all projects added */}
+      <AllProjectsSection />
     </div>
   );
 }
