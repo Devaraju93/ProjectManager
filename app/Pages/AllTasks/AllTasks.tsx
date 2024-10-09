@@ -10,3 +10,5 @@ function AllTasksContainer (){
         </div>
     )
 }
+
+export default AllTasksContainer;
