@@ -3,7 +3,7 @@ import SplitscreenIcon from "@mui/icons-material/Splitscreen";
 
 function StatsRightSideBar() {
   return (
-    <div className="w-[22%] flex justify-end items-center">
+    <div className="w-[22%] flex justify-end items-center max-lg:hidden">
       {/* White Background */}
       <div className="h-[92%] w-[94%] bg-white rounded-l-3xl p-3 flex flex-col ">
         {/* header */}

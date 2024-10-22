@@ -1,5 +1,6 @@
 import SearchIcon from "@mui/icons-material/Search";
 import AddIcon from "@mui/icons-material/Add";
+import MenuIcon from '@mui/icons-material/Menu';
 
 function TasksHeader() {
   return (
@@ -32,14 +33,16 @@ function SearchBar() {
 
 function AddProjectButton() {
   return (
-<button  className="bg-orange-600 text-white px-2 pr-3  text-[14px] rounded-md  flex gap-1 items-center">
-<AddIcon
-className="mt-[2px]"
-sx={{fontSize:"22px"}}
-/>
-<span>New Task</span>
-</button>
-  )
+    <div className="flex gap-3 items-center ">
+    <button className="bg-orange-600 text-white p-2 text-[14px] rounded-md  flex gap-1 items-center">
+      <AddIcon className="mt-[2px]" sx={{ fontSize: "22px" }} />
+      <span className="max-sm:hidden pr-2">New Task</span>
+    </button>
+    <MenuIcon
+    className="text-slate-400 h-9 cursor-pointer hidden max-sm:block"
+    />
+    </div>
+  );
 }
 
 export default TasksHeader;
