@@ -1,6 +1,7 @@
 import SearchIcon from "@mui/icons-material/Search";
 import AddIcon from "@mui/icons-material/Add";
-import MenuIcon from '@mui/icons-material/Menu';
+import MenuIcon from "@mui/icons-material/Menu";
+import { useContextApp } from "@/app/contextApp";
 
 function TasksHeader() {
   return (
@@ -32,15 +33,20 @@ function SearchBar() {
 }
 
 function AddProjectButton() {
+  const {
+    openSideBarObject: {setOpenSidebar,openSidebar},
+  } = useContextApp();
+
   return (
     <div className="flex gap-3 items-center ">
-    <button className="bg-orange-600 text-white p-2 text-[14px] rounded-md  flex gap-1 items-center">
-      <AddIcon className="mt-[2px]" sx={{ fontSize: "22px" }} />
-      <span className="max-sm:hidden pr-2">New Task</span>
-    </button>
-    <MenuIcon
-    className="text-slate-400 h-9 cursor-pointer hidden max-sm:block"
-    />
+      <button className="bg-orange-600 text-white p-2  justify-center text-[14px] rounded-md  flex gap-1 items-center">
+        <AddIcon className="mt-[2px]" sx={{ fontSize: "22px" }} />
+        <span className="max-sm:hidden pr-2">New Task</span>
+      </button>
+      <MenuIcon
+        onClick={() => setOpenSidebar(!openSidebar)}
+        className="text-slate-400 h-9 cursor-pointer hidden max-[940px]:block"
+      />
     </div>
   );
 }

@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import {Inter ,Poppins } from 'next/font/google';
+import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
+import ContextAppProvider from "./contextApp";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const inter = Inter({
-  subsets: ['latin'],
+  subsets: ["latin"],
 });
-
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -14,11 +14,10 @@ export const metadata: Metadata = {
 };
 
 const poppins = Poppins({
-  weight: ['100','200', "300", '400', '500', '600', '700', '800', '900'],
-  subsets: ['latin'],
-  variable: '--font-poppins',
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  subsets: ["latin"],
+  variable: "--font-poppins",
 });
-
 
 export default function RootLayout({
   children,
@@ -27,11 +26,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${poppins.variable} ${poppins.variable} antialiased`}
-      >
-        {children}
-      </body>
+      <ContextAppProvider>
+        <body className={poppins.variable}>{children}</body>
+      </ContextAppProvider>
     </html>
   );
 }

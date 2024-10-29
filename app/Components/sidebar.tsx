@@ -1,53 +1,102 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from "react";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
 import BorderAllIcon from "@mui/icons-material/BorderAll";
 import SplitscreenIcon from "@mui/icons-material/Splitscreen";
 import LogoutIcon from "@mui/icons-material/Logout";
+import { useContextApp } from "@/app/contextApp";
 
-function Sidebar() {
+function SideBar() {
+  const {
+    openSideBarObject: { openSidebar },
+  } = useContextApp();
   return (
-    <div className="w-[97px] max-h-screen py-8 bg-white flex flex-col items-center justify-between max-[940px]:hidden">
+    <div
+      className={`${
+        openSidebar
+          ? "w-[280px] fixed shadow-xl"
+          : "w-[97px] max-[940px]:hidden"
+      } h-screen py-10 bg-white flex flex-col items-center justify-between z-[90] transition-all `}
+
+      // className="w-[97px] max-h-screen py-8 bg-white flex flex-col items-center justify-between max-[940px]:hidden"
+    >
       <Logo />
       <Menu />
-      <Profile/>
+      <Profile />
     </div>
   );
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function Profile() {
-  return <div className="w-7 h-7 bg-orange-600 rounded-md"></div>;
+  const {
+    openSideBarObject: { openSidebar },
+  } = useContextApp();
+  return (
+    <div className="flex items-center gap-2">
+      <div className="w-8 h-8 bg-orange-600 rounded-md"></div>
+      {openSidebar && (
+        <ul>
+          <li className="font-bold text-[14px]">Dummy Name</li>
+          <li className="text-slate-400 text-[11px]">dummy@gmail.com</li>
+        </ul>
+      )}
+    </div>
+  );
 }
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function Menu() {
+  const {
+    openSideBarObject: { openSidebar },
+  } = useContextApp();
   return (
-    <div className="flex flex-col gap-6 items-center">
-      <BorderAllIcon
-        className="text-orange-600 cursor-pointer"
-        sx={{ fontSize: "27px" }}
-      />
+    <div className="flex flex-col gap-6 ">
+      {/* Projects */}
+      <div className="flex items-center gap-2">
+        <BorderAllIcon
+          className="text-orange-600 cursor-pointer"
+          sx={{ fontSize: "27px" }}
+        />
+        { openSidebar && <span className="text-slate-400">All Projects</span>}
+      </div>
 
-      <SplitscreenIcon
-        className="text-slate-300 cursor-pointer"
-        sx={{ fontSize: "25px" }}
-      />
-      <LogoutIcon
-        className="text-slate-300 cursor-pointer"
-        sx={{ fontSize: "27px" }}
-      />
+      {/* Tasks */}
+      <div className="flex items-center gap-2">
+        <SplitscreenIcon
+          className="text-orange-600 cursor-pointer"
+          sx={{ fontSize: "25px" }}
+        />
+        {openSidebar && <span className="text-orange-600">All Tasks</span>}
+      </div>
+      <div className="flex items-center gap-2">
+        <LogoutIcon
+          className="text-slate-300 cursor-pointer"
+          sx={{ fontSize: "27px" }}
+        />
+        {openSidebar && <span className="text-orange-400">Log Out</span>}
+      </div>
     </div>
   );
 }
 
 function Logo() {
+  const {
+    openSideBarObject: { openSidebar },
+  } = useContextApp();
   return (
-    <div>
+    <div className="flex items-center gap-2  justify-center">
       <TaskAltIcon
         className="text-orange-600 font-bold"
         sx={{ fontSize: "41px" }}
       />
+      {openSidebar && (
+        <div className="text-xl flex items-center gap-1 ">
+          <span className="font-semibold">Project</span>
+          <span className="text-slate-600">Master</span>
+        </div>
+      )}
     </div>
   );
 }
 
-export default Sidebar;
+export default SideBar;
