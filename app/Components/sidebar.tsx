@@ -8,12 +8,12 @@ import { useContextApp } from "@/app/contextApp";
 
 function SideBar() {
   const {
-    openSideBarObject: { openSidebar },
+    openSideBarObject: { openSideBar },
   } = useContextApp();
   return (
     <div
       className={`${
-        openSidebar
+        openSideBar
           ? "w-[280px] fixed shadow-xl"
           : "w-[97px] max-[940px]:hidden"
       } h-screen py-10 bg-white flex flex-col items-center justify-between z-[90] transition-all `}
@@ -30,12 +30,12 @@ function SideBar() {
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function Profile() {
   const {
-    openSideBarObject: { openSidebar },
+    openSideBarObject: { openSideBar },
   } = useContextApp();
   return (
     <div className="flex items-center gap-2">
       <div className="w-8 h-8 bg-orange-600 rounded-md"></div>
-      {openSidebar && (
+      {openSideBar && (
         <ul>
           <li className="font-bold text-[14px]">Dummy Name</li>
           <li className="text-slate-400 text-[11px]">dummy@gmail.com</li>
@@ -47,7 +47,7 @@ function Profile() {
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function Menu() {
   const {
-    openSideBarObject: { openSidebar },
+    openSideBarObject: { openSideBar },
   } = useContextApp();
   return (
     <div className="flex flex-col gap-6 ">
@@ -57,7 +57,7 @@ function Menu() {
           className="text-orange-600 cursor-pointer"
           sx={{ fontSize: "27px" }}
         />
-        { openSidebar && <span className="text-slate-400">All Projects</span>}
+        { openSideBar && <span className="text-slate-400">All Projects</span>}
       </div>
 
       {/* Tasks */}
@@ -66,14 +66,14 @@ function Menu() {
           className="text-orange-600 cursor-pointer"
           sx={{ fontSize: "25px" }}
         />
-        {openSidebar && <span className="text-orange-600">All Tasks</span>}
+        {openSideBar && <span className="text-orange-600">All Tasks</span>}
       </div>
       <div className="flex items-center gap-2">
         <LogoutIcon
           className="text-slate-300 cursor-pointer"
           sx={{ fontSize: "27px" }}
         />
-        {openSidebar && <span className="text-orange-400">Log Out</span>}
+        {openSideBar && <span className="text-orange-400">Log Out</span>}
       </div>
     </div>
   );
@@ -81,7 +81,7 @@ function Menu() {
 
 function Logo() {
   const {
-    openSideBarObject: { openSidebar },
+    openSideBarObject: { openSideBar },
   } = useContextApp();
   return (
     <div className="flex items-center gap-2  justify-center">
@@ -89,7 +89,7 @@ function Logo() {
         className="text-orange-600 font-bold"
         sx={{ fontSize: "41px" }}
       />
-      {openSidebar && (
+      {openSideBar && (
         <div className="text-xl flex items-center gap-1 ">
           <span className="font-semibold">Project</span>
           <span className="text-slate-600">Master</span>

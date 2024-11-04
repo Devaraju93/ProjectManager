@@ -34,7 +34,7 @@ function SearchBar() {
 
 function AddProjectButton() {
   const {
-    openSideBarObject: {setOpenSidebar,openSidebar},
+    openSideBarObject: {setOpenSideBar,openSideBar},
   } = useContextApp();
 
   return (
@@ -44,7 +44,7 @@ function AddProjectButton() {
         <span className="max-sm:hidden pr-2">New Task</span>
       </button>
       <MenuIcon
-        onClick={() => setOpenSidebar(!openSidebar)}
+        onClick={() => setOpenSideBar(!openSideBar)}
         className="text-slate-400 h-9 cursor-pointer hidden max-[940px]:block"
       />
     </div>
