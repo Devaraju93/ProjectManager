@@ -6,10 +6,12 @@ import SplitscreenIcon from "@mui/icons-material/Splitscreen";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useContextApp } from "@/app/contextApp";
 import { SvgIconProps } from "@mui/material";
+import { AppType, SideBarMenuItem } from "../types/AppType";
 
 function SideBar() {
   const {
-    openSideBarObject: { openSideBar },
+    openSideBarObject: { openSideBar, setOpenSideBar },
+    sideBarMenuObject: { sideBarMenu, setSideBarMenu },
   } = useContextApp();
 
 const sideBarMenuRef = useRef<HTMLDivElement>(null);
@@ -17,8 +19,9 @@ const sideBarMenuRef = useRef<HTMLDivElement>(null);
 useEffect(() => {
   
   function handleClickOutside(event: MouseEvent) {
-    if (sideBarMenuRef.current 
-      && !sideBarMenuRef.current.contains(event.target as Node)
+    if (
+      sideBarMenuRef.current && 
+      !sideBarMenuRef.current.contains(event.target as Node)
     )
        {
       setOpenSideBar(false);
@@ -35,7 +38,7 @@ useEffect(() => {
     document.removeEventListener("mousedown", handleClickOutside);
   };
 
-}, [openSideBar]);
+}, [openSideBar, setOpenSideBar]);
 
   return (
     <div
@@ -76,10 +79,14 @@ function Profile() {
 
 // Menu
 function Menu() {
+   const {
+    openSideBarObject: { openSideBar, setOpenSideBar },
+    sideBarMenuObject: { sideBarMenu, setSideBarMenu },
+  } = useContextApp();
   const iconMap: Record<string, React.ComponentType<SvgIconProps>> = {
-    "1": "BorderAllIcon",
-    "2": "SplitscreenIcon",
-    "3": "LogoutIcon",
+    "1": BorderAllIcon,
+    "2": SplitscreenIcon,
+    "3": LogoutIcon,
   };
    
   function handleClickedItem (id:number) {
@@ -99,31 +106,56 @@ function Menu() {
 
   return (
     <div className="flex flex-col gap-6 ">
-      {sideBarMenu.map()}
+    {sideBarMenu.map((menuItem: SideBarMenuItem) => {
+  const IconComponent = iconMap[menuItem.id];
+  return (
+    <div
+      onClick={() => {
+        if (menuItem.id === 1 || menuItem.id === 2) {
+          handleClickedItem(menuItem.id);
+        }
+      }}
+      key={menuItem.id}
+      className="flex items-center gap-2 cursor-pointer"
+    >
+      <IconComponent sx={{ fontSize: "25px" }} />
+
+      {openSideBar && (
+        <span
+          className={`${
+            menuItem.isSelected ? "text-orange-600" : "text-slate-300"
+          }`}
+        >
+          {menuItem.name}
+        </span>
+      )}
+    </div>
+  );
+})}
       {/* Projects */}
-      <div className="flex items-center gap-2">
+      {/* <div className="flex items-center gap-2">
         <BorderAllIcon
           className="text-orange-600 cursor-pointer"
           sx={{ fontSize: "27px" }}
         />
         {openSideBar && <span className="text-slate-400">All Projects</span>}
-      </div>
+      </div> */}
 
       {/* Tasks */}
-      <div className="flex items-center gap-2">
+      {/* <div className="flex items-center gap-2">
         <SplitscreenIcon
           className="text-orange-600 cursor-pointer"
           sx={{ fontSize: "25px" }}
         />
         {openSideBar && <span className="text-orange-600">All Tasks</span>}
-      </div>
-      <div className="flex items-center gap-2">
+      </div> */}
+      {/* <div className="flex items-center gap-2">
         <LogoutIcon
           className="text-slate-300 cursor-pointer"
           sx={{ fontSize: "27px" }}
         />
         {openSideBar && <span className="text-orange-400">Log Out</span>}
-      </div>
+      </div> */}
     </div>
   );
 }

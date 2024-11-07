@@ -10,7 +10,7 @@ import { AppType, SideBarMenuItem } from "./types/AppType";
 // setting the default State
 const defaultState: AppType = {
   openSideBarObject: { openSideBar: false, setOpenSideBar: () => {} },
-  sideBarMenuProject: { sideBarMenu: [], setSideBarMenu: () => {} },
+  sideBarMenuObject: { sideBarMenu: [], setSideBarMenu: () => {} },
 };
 
 // creating the context
@@ -68,13 +68,20 @@ useEffect(() => {
   }
 }, [isMobileView]);
 
+useEffect ( () =>{
+ setOpenSideBar(false);
+},[sideBarMenu])
+
 
   return (
     <ContextApp.Provider
-      value={{ openSideBarObject: { openSideBar, setOpenSideBar } }}
-    >
-      {children}
-    </ContextApp.Provider>
+    value={{
+      openSideBarObject: { openSideBar, setOpenSideBar },
+      sideBarMenuObject: { sideBarMenu, setSideBarMenu },
+    }}
+  >
+    {children}
+  </ContextApp.Provider>
   );
 }
 

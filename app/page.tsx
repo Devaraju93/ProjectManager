@@ -8,9 +8,21 @@ import { useContextApp } from "./contextApp";
 import Sidebar from "./Components/sidebar";
 
 export default function Home() {
+
   const {
     openSideBarObject: { openSideBar },
+    sideBarMenuObject : {sideBarMenu}
   } = useContextApp();
+
+const componentMap : Record <number, React.ReactNode> = {
+  1 : <AllProjects/>,
+  2 : <AllTasksContainer/>
+}
+
+const componentKey = sideBarMenu.findIndex((item) => item.isSelected);
+const selectedComponent = componentMap[componentKey + 1 ] || null;
+
+
   return (
   <div className="flex w-full h-screen poppins bg-white">
     {openSideBar && (
@@ -21,7 +33,8 @@ export default function Home() {
     <Sidebar/>
     {/* All Projects Page */}
     {/* <AllProjects/>  */}
-    <AllTasksContainer/>
+    {/* <AllTasksContainer/> */}
+    {selectedComponent && selectedComponent}
     </div>
   )
 }
